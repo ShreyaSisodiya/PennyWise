@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ABED0B9A2CD2DFFA0068290F /* Trips+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED0B982CD2DFFA0068290F /* Trips+CoreDataClass.swift */; };
+		ABED0B9B2CD2DFFA0068290F /* Trips+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED0B992CD2DFFA0068290F /* Trips+CoreDataProperties.swift */; };
+		ABED0B9E2CD2E0120068290F /* People+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED0B9D2CD2E0120068290F /* People+CoreDataProperties.swift */; };
+		ABED0B9F2CD2E0120068290F /* People+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED0B9C2CD2E0120068290F /* People+CoreDataClass.swift */; };
+		ABED0BA62CD2E0370068290F /* Expenses+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED0BA42CD2E0370068290F /* Expenses+CoreDataClass.swift */; };
+		ABED0BA72CD2E0370068290F /* Expenses+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED0BA52CD2E0370068290F /* Expenses+CoreDataProperties.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		ABA3F1092CD2A380004F0FFB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +36,12 @@
 		ABA3F0F32CD2A37D004F0FFB /* PennyWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PennyWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA3F1082CD2A380004F0FFB /* PennyWiseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PennyWiseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA3F1122CD2A380004F0FFB /* PennyWiseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PennyWiseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABED0B982CD2DFFA0068290F /* Trips+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Trips+CoreDataClass.swift"; path = "PennyWise/CoreData/Trips/Trips+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ABED0B992CD2DFFA0068290F /* Trips+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Trips+CoreDataProperties.swift"; path = "PennyWise/CoreData/Trips/Trips+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ABED0B9C2CD2E0120068290F /* People+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "People+CoreDataClass.swift"; path = "PennyWise/CoreData/People/People+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ABED0B9D2CD2E0120068290F /* People+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "People+CoreDataProperties.swift"; path = "PennyWise/CoreData/People/People+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ABED0BA42CD2E0370068290F /* Expenses+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Expenses+CoreDataClass.swift"; path = "PennyWise/CoreData/Expenses/Expenses+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ABED0BA52CD2E0370068290F /* Expenses+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Expenses+CoreDataProperties.swift"; path = "PennyWise/CoreData/Expenses/Expenses+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +90,12 @@
 		ABA3F0EA2CD2A37D004F0FFB = {
 			isa = PBXGroup;
 			children = (
+				ABED0BA42CD2E0370068290F /* Expenses+CoreDataClass.swift */,
+				ABED0BA52CD2E0370068290F /* Expenses+CoreDataProperties.swift */,
+				ABED0B9C2CD2E0120068290F /* People+CoreDataClass.swift */,
+				ABED0B9D2CD2E0120068290F /* People+CoreDataProperties.swift */,
+				ABED0B982CD2DFFA0068290F /* Trips+CoreDataClass.swift */,
+				ABED0B992CD2DFFA0068290F /* Trips+CoreDataProperties.swift */,
 				ABA3F0F52CD2A37D004F0FFB /* PennyWise */,
 				ABA3F10B2CD2A380004F0FFB /* PennyWiseTests */,
 				ABA3F1152CD2A380004F0FFB /* PennyWiseUITests */,
@@ -236,6 +257,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABED0B9A2CD2DFFA0068290F /* Trips+CoreDataClass.swift in Sources */,
+				ABED0B9B2CD2DFFA0068290F /* Trips+CoreDataProperties.swift in Sources */,
+				ABED0B9E2CD2E0120068290F /* People+CoreDataProperties.swift in Sources */,
+				ABED0B9F2CD2E0120068290F /* People+CoreDataClass.swift in Sources */,
+				ABED0BA62CD2E0370068290F /* Expenses+CoreDataClass.swift in Sources */,
+				ABED0BA72CD2E0370068290F /* Expenses+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
