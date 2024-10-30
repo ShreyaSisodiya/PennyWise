@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		ABA3F1092CD2A380004F0FFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABA3F0EB2CD2A37D004F0FFB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABA3F0F22CD2A37D004F0FFB;
+			remoteInfo = PennyWise;
+		};
+		ABA3F1132CD2A380004F0FFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABA3F0EB2CD2A37D004F0FFB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABA3F0F22CD2A37D004F0FFB;
+			remoteInfo = PennyWise;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ABA3F0F32CD2A37D004F0FFB /* PennyWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PennyWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABA3F1082CD2A380004F0FFB /* PennyWiseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PennyWiseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABA3F1122CD2A380004F0FFB /* PennyWiseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PennyWiseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		ABA3F0F52CD2A37D004F0FFB /* PennyWise */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PennyWise;
+			sourceTree = "<group>";
+		};
+		ABA3F10B2CD2A380004F0FFB /* PennyWiseTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PennyWiseTests;
+			sourceTree = "<group>";
+		};
+		ABA3F1152CD2A380004F0FFB /* PennyWiseUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PennyWiseUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABA3F0F02CD2A37D004F0FFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA3F1052CD2A380004F0FFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA3F10F2CD2A380004F0FFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ABA3F0EA2CD2A37D004F0FFB = {
+			isa = PBXGroup;
+			children = (
+				ABA3F0F52CD2A37D004F0FFB /* PennyWise */,
+				ABA3F10B2CD2A380004F0FFB /* PennyWiseTests */,
+				ABA3F1152CD2A380004F0FFB /* PennyWiseUITests */,
+				ABA3F0F42CD2A37D004F0FFB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ABA3F0F42CD2A37D004F0FFB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABA3F0F32CD2A37D004F0FFB /* PennyWise.app */,
+				ABA3F1082CD2A380004F0FFB /* PennyWiseTests.xctest */,
+				ABA3F1122CD2A380004F0FFB /* PennyWiseUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABA3F0F22CD2A37D004F0FFB /* PennyWise */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABA3F11C2CD2A380004F0FFB /* Build configuration list for PBXNativeTarget "PennyWise" */;
+			buildPhases = (
+				ABA3F0EF2CD2A37D004F0FFB /* Sources */,
+				ABA3F0F02CD2A37D004F0FFB /* Frameworks */,
+				ABA3F0F12CD2A37D004F0FFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				ABA3F0F52CD2A37D004F0FFB /* PennyWise */,
+			);
+			name = PennyWise;
+			packageProductDependencies = (
+			);
+			productName = PennyWise;
+			productReference = ABA3F0F32CD2A37D004F0FFB /* PennyWise.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ABA3F1072CD2A380004F0FFB /* PennyWiseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABA3F11F2CD2A380004F0FFB /* Build configuration list for PBXNativeTarget "PennyWiseTests" */;
+			buildPhases = (
+				ABA3F1042CD2A380004F0FFB /* Sources */,
+				ABA3F1052CD2A380004F0FFB /* Frameworks */,
+				ABA3F1062CD2A380004F0FFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABA3F10A2CD2A380004F0FFB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ABA3F10B2CD2A380004F0FFB /* PennyWiseTests */,
+			);
+			name = PennyWiseTests;
+			packageProductDependencies = (
+			);
+			productName = PennyWiseTests;
+			productReference = ABA3F1082CD2A380004F0FFB /* PennyWiseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ABA3F1112CD2A380004F0FFB /* PennyWiseUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABA3F1222CD2A380004F0FFB /* Build configuration list for PBXNativeTarget "PennyWiseUITests" */;
+			buildPhases = (
+				ABA3F10E2CD2A380004F0FFB /* Sources */,
+				ABA3F10F2CD2A380004F0FFB /* Frameworks */,
+				ABA3F1102CD2A380004F0FFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABA3F1142CD2A380004F0FFB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				ABA3F1152CD2A380004F0FFB /* PennyWiseUITests */,
+			);
+			name = PennyWiseUITests;
+			packageProductDependencies = (
+			);
+			productName = PennyWiseUITests;
+			productReference = ABA3F1122CD2A380004F0FFB /* PennyWiseUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABA3F0EB2CD2A37D004F0FFB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					ABA3F0F22CD2A37D004F0FFB = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					ABA3F1072CD2A380004F0FFB = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = ABA3F0F22CD2A37D004F0FFB;
+					};
+					ABA3F1112CD2A380004F0FFB = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = ABA3F0F22CD2A37D004F0FFB;
+					};
+				};
+			};
+			buildConfigurationList = ABA3F0EE2CD2A37D004F0FFB /* Build configuration list for PBXProject "PennyWise" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABA3F0EA2CD2A37D004F0FFB;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = ABA3F0F42CD2A37D004F0FFB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABA3F0F22CD2A37D004F0FFB /* PennyWise */,
+				ABA3F1072CD2A380004F0FFB /* PennyWiseTests */,
+				ABA3F1112CD2A380004F0FFB /* PennyWiseUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABA3F0F12CD2A37D004F0FFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA3F1062CD2A380004F0FFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA3F1102CD2A380004F0FFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABA3F0EF2CD2A37D004F0FFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA3F1042CD2A380004F0FFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABA3F10E2CD2A380004F0FFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ABA3F10A2CD2A380004F0FFB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABA3F0F22CD2A37D004F0FFB /* PennyWise */;
+			targetProxy = ABA3F1092CD2A380004F0FFB /* PBXContainerItemProxy */;
+		};
+		ABA3F1142CD2A380004F0FFB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABA3F0F22CD2A37D004F0FFB /* PennyWise */;
+			targetProxy = ABA3F1132CD2A380004F0FFB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ABA3F11A2CD2A380004F0FFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABA3F11B2CD2A380004F0FFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABA3F11D2CD2A380004F0FFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PennyWise/Preview Content\"";
+				DEVELOPMENT_TEAM = T233U54KH7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.softwaremerchants.PennyWise;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ABA3F11E2CD2A380004F0FFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PennyWise/Preview Content\"";
+				DEVELOPMENT_TEAM = T233U54KH7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.softwaremerchants.PennyWise;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ABA3F1202CD2A380004F0FFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T233U54KH7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.softwaremerchants.PennyWiseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PennyWise.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PennyWise";
+			};
+			name = Debug;
+		};
+		ABA3F1212CD2A380004F0FFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T233U54KH7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.softwaremerchants.PennyWiseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PennyWise.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PennyWise";
+			};
+			name = Release;
+		};
+		ABA3F1232CD2A380004F0FFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T233U54KH7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.softwaremerchants.PennyWiseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PennyWise;
+			};
+			name = Debug;
+		};
+		ABA3F1242CD2A380004F0FFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T233U54KH7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.softwaremerchants.PennyWiseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PennyWise;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABA3F0EE2CD2A37D004F0FFB /* Build configuration list for PBXProject "PennyWise" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABA3F11A2CD2A380004F0FFB /* Debug */,
+				ABA3F11B2CD2A380004F0FFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABA3F11C2CD2A380004F0FFB /* Build configuration list for PBXNativeTarget "PennyWise" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABA3F11D2CD2A380004F0FFB /* Debug */,
+				ABA3F11E2CD2A380004F0FFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABA3F11F2CD2A380004F0FFB /* Build configuration list for PBXNativeTarget "PennyWiseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABA3F1202CD2A380004F0FFB /* Debug */,
+				ABA3F1212CD2A380004F0FFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABA3F1222CD2A380004F0FFB /* Build configuration list for PBXNativeTarget "PennyWiseUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABA3F1232CD2A380004F0FFB /* Debug */,
+				ABA3F1242CD2A380004F0FFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ABA3F0EB2CD2A37D004F0FFB /* Project object */;
+}
