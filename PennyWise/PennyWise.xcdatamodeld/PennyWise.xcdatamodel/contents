@@ -6,7 +6,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="split" optional="YES" attributeType="String"/>
-        <relationship name="belonsToTrip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trips" inverseName="hasExpenses" inverseEntity="Trips"/>
+        <relationship name="belongsToTrip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trips" inverseName="hasExpenses" inverseEntity="Trips"/>
         <relationship name="paidBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="People" inverseName="paidFor" inverseEntity="People"/>
     </entity>
     <entity name="People" representedClassName="People" syncable="YES">
@@ -18,7 +18,7 @@
     <entity name="Trips" representedClassName="Trips" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="hasExpenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expenses" inverseName="belonsToTrip" inverseEntity="Expenses"/>
+        <relationship name="hasExpenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expenses" inverseName="belongsToTrip" inverseEntity="Expenses"/>
         <relationship name="hasPeople" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="People" inverseName="isOnTrips" inverseEntity="People"/>
     </entity>
 </model>

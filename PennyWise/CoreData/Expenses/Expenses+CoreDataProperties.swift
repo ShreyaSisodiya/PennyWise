@@ -21,7 +21,7 @@ extension Expenses {
     @NSManaged public var date: Date?
     @NSManaged public var name: String?
     @NSManaged public var split: String?
-    @NSManaged public var belonsToTrip: Trips?
+    @NSManaged public var belongsToTrip: Trips?
     @NSManaged public var paidBy: People?
 
 }

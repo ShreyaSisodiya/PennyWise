@@ -43,7 +43,7 @@ class ExpensesStorage: NSObject, ObservableObject {
         newExpense.split = split
         newExpense.date = date
         newExpense.bill = bill
-        newExpense.belonsToTrip = currentTrip
+        newExpense.belongsToTrip = currentTrip
         
         try? viewContext.save()
     }
