@@ -20,6 +20,19 @@ extension People {
     @NSManaged public var name: String?
     @NSManaged public var isOnTrips: NSSet?
     @NSManaged public var paidFor: NSSet?
+    
+    public var wrappedName: String? { name ?? "Unknown" }
+    public var wrappedEmail: String? { email ?? "Unknown" }
+    
+    public var tripArray: [Trips] {
+        let set = isOnTrips as? Set<Trips> ?? []
+        return Array(set)
+    }
+    
+    public var expensesArray: [Expenses] {
+        let set = paidFor as? Set<Expenses> ?? []
+        return set.sorted {$0.date! > $1.date!}
+    }
 
 }
 

@@ -21,6 +21,18 @@ extension Trips {
     @NSManaged public var hasExpenses: NSSet?
     @NSManaged public var hasPeople: NSSet?
 
+    public var wrappedName: String? { name ?? "Unknown" }
+    public var wrappedDuration: String? { duration ?? "Unknown" }
+    
+    public var peopleArray: [People] {
+        let set = hasPeople as? Set<People> ?? []
+        return set.sorted {$0.wrappedName! < $1.wrappedName!}
+    }
+    
+    public var expensesArray: [Expenses] {
+        let set = hasExpenses as? Set<Expenses> ?? []
+        return set.sorted {$0.date! > $1.date!}
+    }
 }
 
 // MARK: Generated accessors for hasExpenses
