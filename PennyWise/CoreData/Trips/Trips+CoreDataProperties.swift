@@ -21,12 +21,12 @@ extension Trips {
     @NSManaged public var hasExpenses: NSSet?
     @NSManaged public var hasPeople: NSSet?
 
-    public var wrappedName: String? { name ?? "Unknown" }
-    public var wrappedDuration: String? { duration ?? "Unknown" }
+    public var wrappedName: String { name ?? "Unknown" }
+    public var wrappedDuration: String { duration ?? "Unknown" }
     
     public var peopleArray: [People] {
         let set = hasPeople as? Set<People> ?? []
-        return set.sorted {$0.wrappedName! < $1.wrappedName!}
+        return set.sorted {$0.wrappedName < $1.wrappedName}
     }
     
     public var expensesArray: [Expenses] {

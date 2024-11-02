@@ -12,7 +12,7 @@ import CoreData
 class TripsStorage: NSObject, ObservableObject {
     
     var trips = CurrentValueSubject<[Trips], Never>([])
-    private let tripsFetchCotroller: NSFetchedResultsController<Trips>
+    private let tripsFetchController: NSFetchedResultsController<Trips>
     let viewContext = PersistenceController.shared.container.viewContext
     
     static let shared: TripsStorage = TripsStorage()
@@ -20,15 +20,15 @@ class TripsStorage: NSObject, ObservableObject {
     private override init() {
         let fetchRequest: NSFetchRequest<Trips> = Trips.fetchRequest()
         fetchRequest.sortDescriptors = []
-        tripsFetchCotroller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        tripsFetchController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
         super.init()
         
-        tripsFetchCotroller.delegate = self
+        tripsFetchController.delegate = self
         
         do{
-            try tripsFetchCotroller.performFetch()
-            trips.value = tripsFetchCotroller.fetchedObjects ?? []
+            try tripsFetchController.performFetch()
+            trips.value = tripsFetchController.fetchedObjects ?? []
         } catch{
             NSLog("Error: Could not fetch objects")
         }

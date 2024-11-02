@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import CoreData
+//import SwiftUICore
 
 class AddTripViewModel: ObservableObject {
     
@@ -22,7 +24,9 @@ class AddTripViewModel: ObservableObject {
     @Published var peopleEmails = [String]()
     @Published var newPersonName: String = ""
     @Published var newPersonEmail: String = ""
-    @Published var personChosen: People = People()
+    //@Published var personChosen: People = People()
+    @Published var personChosen: People
+    
     @Published var inlineErrorForTripName: String = ""
     @Published var inlineErrorForPeople: String = ""
     @Published var isValid: Bool = false
@@ -78,11 +82,25 @@ class AddTripViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    init(){
+    init(context: NSManagedObjectContext){
+//        cancellable = peoplePublisher.sink { people in
+//            self.people = people
+//            DispatchQueue.main.async{
+//                self.personChosen = self.people[0]
+//            }
+//        }
+        
+        self.personChosen = People(context: context)
+        
         cancellable = peoplePublisher.sink { people in
             self.people = people
-            DispatchQueue.main.async{
-                self.personChosen = self.people[0]
+            DispatchQueue.main.async {
+                if let firstPerson = people.first {
+                    self.personChosen = firstPerson
+                } else {
+                    // Handle the case where the people array is empty
+                    print("No people available")
+                }
             }
         }
         

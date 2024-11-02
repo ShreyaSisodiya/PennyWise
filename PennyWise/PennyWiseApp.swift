@@ -13,8 +13,10 @@ struct PennyWiseApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           //ContentView()
+            AddTripView(context: persistenceController.container.viewContext)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            //AddTripView()
         }
     }
 }
