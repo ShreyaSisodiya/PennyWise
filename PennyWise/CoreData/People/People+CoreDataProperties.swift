@@ -21,8 +21,8 @@ extension People {
     @NSManaged public var isOnTrips: NSSet?
     @NSManaged public var paidFor: NSSet?
     
-    public var wrappedName: String? { name ?? "Unknown" }
-    public var wrappedEmail: String? { email ?? "Unknown" }
+    public var wrappedName: String { name ?? "Unknown" }
+    public var wrappedEmail: String { email ?? "Unknown" }
     
     public var tripArray: [Trips] {
         let set = isOnTrips as? Set<Trips> ?? []
