@@ -8,25 +8,25 @@
 import Foundation
 import Combine
 
-class TripInfoViewModel: ObservableObject{
+class TripInfoViewModel : ObservableObject{
     
     @Published var people : [People] = []
-    private var cancellable: AnyCancellable?
-    var peoplePublisher: AnyPublisher<[People], Never> = PeopleStorage.shared.people.eraseToAnyPublisher()
+    private var cancellable : AnyCancellable?
+    var peoplePublisher : AnyPublisher<[People], Never> = PeopleStorage.shared.people.eraseToAnyPublisher()
     
-    var currentTrip: Trips?
+    var currentTrip : Trips?
     
     @Published var peopleNames = [String]()
     @Published var peopleEmails = [String]()
-    @Published var newPersonName: String = ""
-    @Published var newPersonEmail: String = ""
-    @Published var personChosen: People = People()
-    @Published var moveToExpenses: Bool = false
-    @Published var moveToSettleUp: Bool = false
-    @Published var newPersonIsValid: Bool = false
+    @Published var newPersonName : String = ""
+    @Published var newPersonEmail : String = ""
+    @Published var personChosen : People = People()
+    @Published var moveToExpenses : Bool = false
+    @Published var moveToSettleUp : Bool = false
+    @Published var newPersonIsValid : Bool = false
     private var cancellables = Set<AnyCancellable>()
     
-    private var isNewPersonNameEmptyPublisher: AnyPublisher<Bool, Never> {
+    private var isNewPersonNameEmptyPublisher : AnyPublisher<Bool, Never>{
         $newPersonName
             .debounce(for: 0.2, scheduler: RunLoop.main)
             .removeDuplicates()
@@ -34,7 +34,7 @@ class TripInfoViewModel: ObservableObject{
             .eraseToAnyPublisher()
     }
     
-    private var isNewPersonEmailEmptyPublisher: AnyPublisher<Bool, Never> {
+    private var isNewPersonEmailEmptyPublisher : AnyPublisher<Bool, Never>{
         $newPersonEmail
             .debounce(for: 0.2, scheduler: RunLoop.main)
             .removeDuplicates()
@@ -42,23 +42,23 @@ class TripInfoViewModel: ObservableObject{
             .eraseToAnyPublisher()
     }
     
-    private var isNewPersonValidPublisher: AnyPublisher<Bool, Never> {
+    private var isNewPersonValidPublisher : AnyPublisher<Bool, Never>{
         Publishers.CombineLatest(isNewPersonNameEmptyPublisher, isNewPersonEmailEmptyPublisher)
-            .map {
+            .map{
                 !$0 && !$1
             }
             .eraseToAnyPublisher()
     }
     
-    init(currentTrip: Trips){
+    
+    init(currentTrip : Trips){
         self.currentTrip = currentTrip
-        cancellable = peoplePublisher.sink { people in
+        cancellable = peoplePublisher.sink{ people in
             self.people = people
             DispatchQueue.main.async {
                 self.personChosen = self.people[0]
             }
         }
-        
         for person in people{
             if person.tripArray.contains(currentTrip){
                 peopleNames.append(person.wrappedName)
@@ -73,8 +73,8 @@ class TripInfoViewModel: ObservableObject{
     }
     
     func addPerson(){
-        peopleNames.append(personChosen.wrappedName)
-        peopleEmails.append(personChosen.wrappedEmail)
+            peopleNames.append(personChosen.wrappedName)
+            peopleEmails.append(personChosen.wrappedEmail)
     }
     
     func addNewPerson(){
@@ -84,12 +84,13 @@ class TripInfoViewModel: ObservableObject{
         newPersonEmail = ""
     }
     
-    func confirmChanges(currentTrip: Trips){
+    func confirmChanges(currentTrip : Trips){
         TripsStorage.shared.addPeopleToTrip(currentTrip: currentTrip, peopleNames: peopleNames, peopleEmails: peopleEmails)
     }
     
     func settleUp(){
         print(people)
     }
-    
+
 }
+

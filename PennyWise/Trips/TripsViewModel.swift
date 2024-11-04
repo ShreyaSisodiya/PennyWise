@@ -8,13 +8,14 @@
 import Foundation
 import Combine
 
-class TripsViewModel: ObservableObject{
-    @Published var trips: [Trips] = []
-    private var cancellable: AnyCancellable?
+class TripsViewModel : ObservableObject{
     
-    var tripsPublisher: AnyPublisher<[Trips], Never> = TripsStorage.shared.trips.eraseToAnyPublisher()
+    @Published var trips : [Trips] = []
+    private var cancellable : AnyCancellable?
+    
+    var tripsPublisher : AnyPublisher<[Trips], Never> = TripsStorage.shared.trips.eraseToAnyPublisher()
     
     init(){
-        cancellable = tripsPublisher.sink { trips in self.trips = trips}
+        cancellable = tripsPublisher.sink{ trips in self.trips = trips }
     }
 }

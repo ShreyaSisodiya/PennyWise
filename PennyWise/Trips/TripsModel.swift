@@ -12,4 +12,4 @@ import CoreGraphics
 let tripsNavigationTitle: String = "Trips"
 let plusImage: String = "plus"
 let tripsVStackSpacing: CGFloat = 10.0
-let tripsHStackSpacing: CGFloat = 75.0
+let tripsVStackHeight: CGFloat = 75.0
