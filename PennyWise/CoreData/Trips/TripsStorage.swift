@@ -78,3 +78,19 @@ extension TripsStorage: NSFetchedResultsControllerDelegate {
         self.trips.value = trips
     }
 }
+
+extension TripsStorage {
+    func doesTripExist(withName name: String) -> Bool {
+        let fetchRequest: NSFetchRequest<Trips> = Trips.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        
+        do {
+            let existingTrips = try viewContext.fetch(fetchRequest)
+            print("Existing trips with the name \(name): \(existingTrips.count)")
+            return !existingTrips.isEmpty
+        } catch {
+            NSLog("Error checking for duplicate trip names: \(error)")
+            return false
+        }
+    }
+}

@@ -18,6 +18,8 @@ struct AddTripView: View {
                 Section(header : Text(tripNameHeader), footer : Text(addTripViewModel.inlineErrorForTripName).foregroundColor(.red)){
                     TextField(tripNameTextField, text: $addTripViewModel.tripName)
                 }
+                
+
                 Section(header : Text(tripDurationHeader)){
                     DatePicker(tripDurationFrom, selection: $addTripViewModel.durationFrom, displayedComponents: .date)
                     DatePicker(tripDurationTo, selection: $addTripViewModel.durationTo, displayedComponents: .date)
@@ -32,12 +34,18 @@ struct AddTripView: View {
                         Image(systemName: backspace).imageScale(.large)
                     }
                 }
-                Section(header : Text(addAPersonHeader)){
-                    Picker(peopleNamePickerText, selection: $addTripViewModel.personChosen){
-                        ForEach(addTripViewModel.people, id : \.self){ item in
+                Section(header : Text(addPersonHeader)){
+                    Picker(peopleNamePickerText, selection: Binding(
+                        get: { addTripViewModel.personChosen ?? addTripViewModel.people.first ?? People() },
+                        set: { newSelection in
+                            addTripViewModel.personChosen = newSelection
+                        }
+                    )) {
+                        ForEach(addTripViewModel.people, id: \.self) { item in
                             Text(item.wrappedName)
                         }
                     }
+
                     Button(action: addTripViewModel.addPerson){
                         RoundedRectangle(cornerRadius: buttonCornerRadius)
                             .frame(height : buttonFrameHeight)

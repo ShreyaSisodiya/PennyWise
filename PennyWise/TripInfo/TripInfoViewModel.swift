@@ -20,7 +20,8 @@ class TripInfoViewModel : ObservableObject{
     @Published var peopleEmails = [String]()
     @Published var newPersonName : String = ""
     @Published var newPersonEmail : String = ""
-    @Published var personChosen : People = People()
+    //@Published var personChosen : People = People()
+    @Published var personChosen: People?
     @Published var moveToExpenses : Bool = false
     @Published var moveToSettleUp : Bool = false
     @Published var newPersonIsValid : Bool = false
@@ -53,10 +54,17 @@ class TripInfoViewModel : ObservableObject{
     
     init(currentTrip : Trips){
         self.currentTrip = currentTrip
-        cancellable = peoplePublisher.sink{ people in
+        
+        cancellable = peoplePublisher.sink{ [weak self] people in
+            guard let self = self else { return }
             self.people = people
             DispatchQueue.main.async {
-                self.personChosen = self.people[0]
+                // Safely assign a valid 'People' object if 'people' is not empty
+                if let firstPerson = self.people.first {
+                    self.personChosen = firstPerson
+                } else {
+                    self.personChosen = nil
+                }
             }
         }
         for person in people{
@@ -72,10 +80,18 @@ class TripInfoViewModel : ObservableObject{
             .store(in: &cancellables)
     }
     
-    func addPerson(){
-            peopleNames.append(personChosen.wrappedName)
-            peopleEmails.append(personChosen.wrappedEmail)
+//    func addPerson(){
+//            peopleNames.append(personChosen!.wrappedName)
+//            peopleEmails.append(personChosen!.wrappedEmail)
+//    }
+    
+    func addPerson() {
+        if let chosenPerson = personChosen {
+            peopleNames.append(chosenPerson.wrappedName)
+            peopleEmails.append(chosenPerson.wrappedEmail)
+        }
     }
+
     
     func addNewPerson(){
         peopleNames.append(newPersonName)

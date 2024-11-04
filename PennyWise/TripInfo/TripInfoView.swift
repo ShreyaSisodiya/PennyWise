@@ -28,8 +28,13 @@ struct TripInfoView: View {
                     }
                 }
                 Section(header : Text(addPersonHeader)){
-                    Picker(peopleNamePickerText, selection: $tripInfoViewModel.personChosen){
-                        ForEach(tripInfoViewModel.people, id : \.self){ item in
+                    Picker(peopleNamePickerText, selection: Binding(
+                        get: { tripInfoViewModel.personChosen ?? tripInfoViewModel.people.first ?? People() },
+                        set: { newSelection in
+                            tripInfoViewModel.personChosen = newSelection
+                        }
+                    )) {
+                        ForEach(tripInfoViewModel.people, id: \.self) { item in
                             Text(item.wrappedName)
                         }
                     }
