@@ -27,6 +27,8 @@ class AddTripViewModel : ObservableObject{
     
     @Published var inlineErrorForTripName : String = ""
     @Published var inlineErrorForPeople : String = ""
+    @Published var inlineErrorForEmail: String = ""
+
     @Published var isValid : Bool = false
     @Published var newPersonIsValid : Bool = false
     @Published var personIsValid : Bool = false
@@ -83,13 +85,27 @@ class AddTripViewModel : ObservableObject{
             .eraseToAnyPublisher()
     }
     
-    private var isNewPersonValidPublisher : AnyPublisher<Bool, Never>{
-        Publishers.CombineLatest(isNewPersonNameEmptyPublisher, isNewPersonEmailEmptyPublisher)
-            .map{
-                !$0 && !$1
+    private var isNewPersonEmailUniquePublisher: AnyPublisher<Bool, Never> {
+        $newPersonEmail
+            .debounce(for: 0.2, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .map { newEmail in
+                // Check if the new email already exists in the current list of peopleEmails
+                return !self.peopleEmails.contains(newEmail.lowercased())
             }
             .eraseToAnyPublisher()
     }
+
+    
+    private var isNewPersonValidPublisher: AnyPublisher<Bool, Never> {
+        Publishers.CombineLatest3(isNewPersonNameEmptyPublisher, isNewPersonEmailEmptyPublisher, isNewPersonEmailUniquePublisher)
+            .map { isNameEmpty, isEmailEmpty, isEmailUnique in
+                !isNameEmpty && !isEmailEmpty && isEmailUnique
+            }
+            .eraseToAnyPublisher()
+    }
+
+
     private var isPersonValidPublisher : AnyPublisher<Bool, Never>{
         $personIsValid
             .map { _ in !self.people.isEmpty }
@@ -107,7 +123,6 @@ class AddTripViewModel : ObservableObject{
     private var isFormValidPublisher: AnyPublisher<Bool, Never> {
         Publishers.CombineLatest3(isTripNameEmptyPublisher, isPeopleEmptyPublisher, isTripNameUniquePublisher)
             .map { isTripNameEmpty, isPeopleEmpty, isTripNameUnique in
-                // Form is valid if the trip name is not empty, people are added, and the trip name is unique
                 !isTripNameEmpty && !isPeopleEmpty && isTripNameUnique
             }
             .eraseToAnyPublisher()
@@ -172,12 +187,20 @@ class AddTripViewModel : ObservableObject{
             peopleEmails.append(personChosen!.wrappedEmail)
     }
     
-    func addNewPerson(){
-        peopleNames.append(newPersonName)
-        peopleEmails.append(newPersonEmail)
-        newPersonName = ""
-        newPersonEmail = ""
+    func addNewPerson() {
+        // Check if the new person email already exists in the list
+        if !peopleEmails.contains(newPersonEmail.lowercased()) {
+            peopleNames.append(newPersonName)
+            peopleEmails.append(newPersonEmail)
+            newPersonName = ""
+            newPersonEmail = ""
+        } else {
+            // Optionally, set an inline error or show a warning if desired
+            inlineErrorForPeople = "A person with this email already exists in the trip."
+        }
     }
+
+
     
     func deletePerson(){
         if !peopleNames.isEmpty{

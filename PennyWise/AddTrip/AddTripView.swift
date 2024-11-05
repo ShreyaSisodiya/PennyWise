@@ -24,6 +24,8 @@ struct AddTripView: View {
                     DatePicker(tripDurationFrom, selection: $addTripViewModel.durationFrom, displayedComponents: .date)
                     DatePicker(tripDurationTo, selection: $addTripViewModel.durationTo, displayedComponents: .date)
                 }
+                
+                
                 Section(header : Text(tripPeopleHeader), footer: Text(addTripViewModel.inlineErrorForPeople).foregroundColor(.red)){
                     List{
                         ForEach(addTripViewModel.peopleNames, id : \.self){name in
@@ -34,6 +36,8 @@ struct AddTripView: View {
                         Image(systemName: backspace).imageScale(.large)
                     }
                 }
+                
+                
                 Section(header : Text(addPersonHeader)){
                     Picker(peopleNamePickerText, selection: Binding(
                         get: { addTripViewModel.personChosen ?? addTripViewModel.people.first ?? People() },
@@ -53,16 +57,19 @@ struct AddTripView: View {
                     }.padding()
                         .disabled(!addTripViewModel.personIsValid)
                 }
+                
+                
                 Section(header : Text(addNewPersonHeader)){
                     TextField(newNameText, text: $addTripViewModel.newPersonName)
                     TextField(newEmailText, text: $addTripViewModel.newPersonEmail).autocapitalization(.none)
+                    
                     Button(action: addTripViewModel.addNewPerson){
                         RoundedRectangle(cornerRadius: buttonCornerRadius)
                             .frame(height : buttonFrameHeight)
                             .overlay(Text(addNewPersonButtonText).foregroundColor(.white))
-                    }.padding()
-                        .disabled(!addTripViewModel.newPersonIsValid)
-                }
+                        }.padding()
+                            .disabled(!addTripViewModel.newPersonIsValid)
+                    }
             }
             Button(action : {addTripViewModel.addTrip(); self.mode.wrappedValue.dismiss()}){
                 RoundedRectangle(cornerRadius: buttonCornerRadius)

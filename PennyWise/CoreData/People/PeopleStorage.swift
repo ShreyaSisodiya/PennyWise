@@ -42,3 +42,19 @@ extension PeopleStorage: NSFetchedResultsControllerDelegate {
         self.people.value = people
     }
 }
+
+extension PeopleStorage {
+    func doesPersonExist(withEmail email: String) -> Bool {
+        let fetchRequest: NSFetchRequest<People> = People.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email ==[c] %@", email) // Case-insensitive check
+
+        do {
+            let existingPeople = try viewContext.fetch(fetchRequest)
+            return !existingPeople.isEmpty
+        } catch {
+            NSLog("Error checking for duplicate person emails: \(error)")
+            return false
+        }
+    }
+}
+
