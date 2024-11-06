@@ -12,6 +12,8 @@ struct AddExpensesView: View {
     let currentTrip : Trips
     @StateObject private var addExpensesViewModel : AddExpensesViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @EnvironmentObject var currencyManager: CurrencyManager
+    
     
     init(currentTrip : Trips, addExpensesViewModel : AddExpensesViewModel){
         self.currentTrip = currentTrip
@@ -25,6 +27,8 @@ struct AddExpensesView: View {
                 Section(header : Text(expenseNameHeader), footer: Text(addExpensesViewModel.inlineErrorForExpenseName).foregroundColor(.red)){
                     TextField(expenseNameTextField, text: $addExpensesViewModel.expenseName)
                 }
+                
+                
                 Section(header : Text(paidByText)){
                     Picker(paidByText, selection: $addExpensesViewModel.expensePaidBy){
                         ForEach(addExpensesViewModel.peopleInTrip, id : \.self){ person in
@@ -32,9 +36,22 @@ struct AddExpensesView: View {
                         }
                     }
                 }
-                Section(header : Text(expenseAmountHeader), footer: Text(addExpensesViewModel.inlineErrorForExpenseAmount).foregroundColor(.red)){
+                
+                
+                Section(header: Text("\(expenseAmountHeader) (\(currencyManager.selectedCurrency))"),
+                        footer: Text(addExpensesViewModel.inlineErrorForExpenseAmount).foregroundColor(.red)) {
                     TextField(expenseAmountTextField, text: $addExpensesViewModel.expenseCost)
+                        .keyboardType(.decimalPad)
+                    
+                    // Display the equivalent amount in the footer
+                    if !addExpensesViewModel.equivalentAmount.isEmpty {
+                        Text("Equivalent in \(currencyManager.selectedCurrency == "USD" ? "Euro" : "USD"): \(addExpensesViewModel.equivalentAmount)")
+                            .foregroundColor(.gray)
+                    }
                 }
+                
+                
+                
                 Section(header : Text(customSplitHeader)){
                     Toggle(isOn : $addExpensesViewModel.customSplitEnabled){
                         Text(customSplitToggleText)
@@ -42,10 +59,19 @@ struct AddExpensesView: View {
                     if(addExpensesViewModel.customSplitEnabled){
                         VStack{
                             ForEach(0 ..< addExpensesViewModel.peopleInTrip.count, id : \.self){ item in
+                                HStack{
+                                    Text("\(addExpensesViewModel.peopleInTrip[item].wrappedName) \(toPay)")
+                                    
+                                    let placeholder = currencyManager.selectedCurrency == "USD" ? doubleDollar : "€€"
+                                    
                                     HStack{
-                                        Text("\(addExpensesViewModel.peopleInTrip[item].wrappedName) \(toPay)")
-                                        TextField(doubleDollar, text: $addExpensesViewModel.splitAmounts[item]).multilineTextAlignment(.trailing)
+                                        Text(currencyManager.selectedCurrency == "USD" ? "$" : "€")
+                                        TextField(placeholder, text: $addExpensesViewModel.splitAmounts[item])
+                                            .multilineTextAlignment(.trailing)
+                                            .keyboardType(.decimalPad)
+                                            
                                     }
+                                }
                             }
                             Text(addExpensesViewModel.inlineErrorForSplitAmounts).foregroundColor(.red)
                         }
@@ -86,4 +112,3 @@ struct AddExpensesView: View {
     
     }
 }
-

@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct PennyWiseApp: App {
     let persistenceController = PersistenceController.shared
-
+    @StateObject private var currencyManager = CurrencyManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(currencyManager)
         }
     }
 }

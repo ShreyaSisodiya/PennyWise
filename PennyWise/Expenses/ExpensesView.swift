@@ -12,6 +12,7 @@ struct ExpensesView: View {
     
     @StateObject private var expensesViewModel = ExpensesViewModel()
     let currentTrip : Trips
+    @EnvironmentObject var currencyManager: CurrencyManager
     
     var body: some View {
         List{
@@ -21,7 +22,11 @@ struct ExpensesView: View {
                         Section{
                             VStack(alignment: .leading, spacing: 10){
                                 Text(expense.name!)
-                                let subtitle : String = expense.paidBy!.wrappedName + paid + expense.amount! + dollar
+                                
+                                // Displaying the amount with the correct currency symbol
+                                let currencySymbol = currencyManager.selectedCurrency == "USD" ? "$" : "€"
+                                let subtitle = "\(expense.paidBy!.wrappedName) paid: \(currencySymbol)\(expense.amount!)"
+                                
                                 Text(subtitle).font(.subheadline).foregroundColor(.gray)
                             }.frame(height : 75)
                         }
@@ -31,7 +36,7 @@ struct ExpensesView: View {
         }
         .navigationTitle(expensesNavigationTitle)
         .toolbar{
-            NavigationLink(destination : AddExpensesView(currentTrip: currentTrip, addExpensesViewModel: AddExpensesViewModel(currentTrip: currentTrip))){
+            NavigationLink(destination : AddExpensesView(currentTrip: currentTrip, addExpensesViewModel: AddExpensesViewModel(currentTrip: currentTrip, currencyManager: currencyManager))){
                 Image(systemName: plusImage).imageScale(.large)
             }
         }

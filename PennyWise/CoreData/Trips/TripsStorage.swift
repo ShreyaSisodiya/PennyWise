@@ -34,6 +34,29 @@ class TripsStorage: NSObject, ObservableObject {
         }
     }
     
+//    func add(tripName: String, tripDuration: String, peopleNames: [String], peopleEmails: [String]) {
+//        
+//        let newTrip = Trips(context: viewContext)
+//        newTrip.name = tripName
+//        newTrip.duration = tripDuration
+//        
+//        var peopleArray = [People]()
+//        
+//        for item in 0..<peopleNames.count {
+//            if !PeopleStorage.shared.doesPersonExist(withEmail: peopleEmails[item]) {
+//                let person = People(context: viewContext)
+//                person.name = peopleNames[item]
+//                person.email = peopleEmails[item]
+//                peopleArray.append(person)
+//            } else {
+//                print("Person with email \(peopleEmails[item]) already exists and won't be added.")
+//            }
+//        }
+//        
+//        newTrip.addToHasPeople(NSSet(array: peopleArray))
+//        try? viewContext.save()
+//    }
+    
     func add(tripName: String, tripDuration: String, peopleNames: [String], peopleEmails: [String]) {
         
         let newTrip = Trips(context: viewContext)
@@ -42,33 +65,77 @@ class TripsStorage: NSObject, ObservableObject {
         
         var peopleArray = [People]()
         
-        for item in 0..<peopleNames.count {
-            let person = People(context: viewContext)
-            person.name = peopleNames[item]
-            person.email = peopleNames[item]
-            peopleArray.append(person)
+        for (index, email) in peopleEmails.enumerated() {
+            if let existingPerson = PeopleStorage.shared.people.value.first(where: { $0.wrappedEmail.lowercased() == email.lowercased() }) {
+                // If person exists, link them to the trip
+                peopleArray.append(existingPerson)
+            } else {
+                // Otherwise, create a new person and link to the trip
+                let newPerson = People(context: viewContext)
+                newPerson.name = peopleNames[index]
+                newPerson.email = email
+                peopleArray.append(newPerson)
+            }
         }
         
         newTrip.addToHasPeople(NSSet(array: peopleArray))
         
-        try? viewContext.save()
+        do {
+            try viewContext.save()
+            print("New trip and people saved successfully.")
+        } catch {
+            print("Failed to save trip: \(error)")
+        }
     }
     
-    func addPeopleToTrip(currentTrip: Trips, peopleNames: [String], peopleEmails: [String]){
-        
+
+//    func addPeopleToTrip(currentTrip: Trips, peopleNames: [String], peopleEmails: [String]) {
+//        var peopleArray = [People]()
+//        
+//        for item in 0..<peopleNames.count {
+//            if !PeopleStorage.shared.doesPersonExist(withEmail: peopleEmails[item]) {
+//                let person = People(context: viewContext)
+//                person.name = peopleNames[item]
+//                person.email = peopleEmails[item]
+//                peopleArray.append(person)
+//            } else {
+//                print("Person with email \(peopleEmails[item]) already exists and won't be added.")
+//            }
+//        }
+//        
+//        currentTrip.addToHasPeople(NSSet(array: peopleArray))
+//        try? viewContext.save()
+//    }
+    
+    func addPeopleToTrip(currentTrip: Trips, peopleNames: [String], peopleEmails: [String]) {
         var peopleArray = [People]()
-        
+
         for item in 0..<peopleNames.count {
-            let person = People(context: viewContext)
-            person.name = peopleNames[item]
-            person.email = peopleNames[item]
-            peopleArray.append(person)
+            // Check if person already exists in PeopleStorage
+            if let existingPerson = PeopleStorage.shared.people.value.first(where: { $0.wrappedEmail.lowercased() == peopleEmails[item].lowercased() }) {
+                // If the person exists, add them to the array for linking
+                peopleArray.append(existingPerson)
+            } else {
+                // Otherwise, create a new person and add to the array
+                let newPerson = People(context: viewContext)
+                newPerson.name = peopleNames[item]
+                newPerson.email = peopleEmails[item]
+                peopleArray.append(newPerson)
+            }
         }
         
+        // Add all people (existing and new) to the trip
         currentTrip.addToHasPeople(NSSet(array: peopleArray))
         
-        try? viewContext.save()
+        do {
+            // Save changes to persist the additions
+            try viewContext.save()
+            print("People added to trip: \(peopleNames)")
+        } catch {
+            print("Error saving people to trip: \(error)")
+        }
     }
+
 }
 
 extension TripsStorage: NSFetchedResultsControllerDelegate {

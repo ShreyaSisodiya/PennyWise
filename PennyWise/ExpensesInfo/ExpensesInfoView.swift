@@ -12,6 +12,7 @@ struct ExpensesInfoView: View {
     
     @StateObject private var expensesInfoViewModel : ExpensesInfoViewModel
     let currentExpense : Expenses
+    @EnvironmentObject var currencyManager: CurrencyManager
     
     init(currentExpense : Expenses, expensesInfoViewModel : ExpensesInfoViewModel){
         self.currentExpense = currentExpense
@@ -24,14 +25,23 @@ struct ExpensesInfoView: View {
                 Text(expensesInfoViewModel.currentExpense.paidBy!.wrappedName)
             }
             Section(header : Text(expenseAmountHeader)){
-                Text("\(expensesInfoViewModel.currentExpense.amount!)\(dollar)")
+                let currencySymbol = currencyManager.selectedCurrency == "USD" ? "$" : "€"
+                Text("\(currencySymbol)\(expensesInfoViewModel.currentExpense.amount!)")
             }
             Section(header : Text(date)){
                 Text(expensesInfoViewModel.dateFormatter.string(from: currentExpense.date!))
             }
             Section(header : Text(sharesHeader)){
                 ForEach(0 ..< expensesInfoViewModel.peopleInTrip.count, id : \.self){item in
-                    Text("\(expensesInfoViewModel.peopleInTrip[item].wrappedName)\(aphostropheS) \(share) \(expensesInfoViewModel.split[item])\(dollar)")
+                    let currencySymbol = currencyManager.selectedCurrency == "USD" ? "$" : "€"
+                    
+                    // Ensure `split` array has a valid element at `item` index
+                    if item < expensesInfoViewModel.split.count {
+                        Text("\(expensesInfoViewModel.peopleInTrip[item].wrappedName)\(aphostropheS) \(share) \(currencySymbol)\(expensesInfoViewModel.split[item])")
+                    } else {
+                        Text("\(expensesInfoViewModel.peopleInTrip[item].wrappedName)\(aphostropheS) \(share) \(currencySymbol)0.00")
+                    }
+                   // Text("\(expensesInfoViewModel.peopleInTrip[item].wrappedName)\(aphostropheS) \(share) \(currencySymbol)\(expensesInfoViewModel.split[item])")
                 }
             }
             Section(header : Text(receiptText)){

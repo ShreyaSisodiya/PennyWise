@@ -29,6 +29,16 @@ class PeopleStorage: NSObject, ObservableObject {
         do{
             try peopleFetchCotroller.performFetch()
             people.value = peopleFetchCotroller.fetchedObjects ?? []
+            
+            // Add debug logging to check for duplicates
+            let uniqueEmails = Set(people.value.map { $0.wrappedEmail })
+            print("Unique emails count: \(uniqueEmails.count), Total people count: \(people.value.count)")
+            
+            // Log individual entries
+            people.value.forEach { person in
+                print("Loaded person: \(person.wrappedName) with email: \(person.wrappedEmail)")
+            }
+
         } catch{
             NSLog("Error: Could not fetch objects")
         }
@@ -44,17 +54,55 @@ extension PeopleStorage: NSFetchedResultsControllerDelegate {
 }
 
 extension PeopleStorage {
+//    func doesPersonExist(withEmail email: String) -> Bool {
+//        // Directly check the stored people array for any matching email
+//        let lowercasedEmail = email.lowercased()
+//        return people.value.contains { $0.wrappedEmail.lowercased() == lowercasedEmail }
+//    }
+    
     func doesPersonExist(withEmail email: String) -> Bool {
-        let fetchRequest: NSFetchRequest<People> = People.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email ==[c] %@", email) // Case-insensitive check
+        let lowercasedEmail = email.lowercased()
+        NSLog("Checking existence for email: \(lowercasedEmail)")
+        
+        // Log all emails in the array to ensure they are as expected
+        people.value.forEach { person in
+            NSLog("Stored email: \(person.wrappedEmail.lowercased())")
+        }
+        
+        let result = people.value.contains { $0.wrappedEmail.lowercased() == lowercasedEmail }
+        NSLog("Email exists: \(result)")
+        return result
+    }
+    
+    func doesPersonExist(withName name: String) -> Bool {
+        // Directly check the stored people array for any matching name
+        let lowercasedName = name.lowercased()
+        return people.value.contains { $0.wrappedName.lowercased() == lowercasedName }
+    }
+}
 
-        do {
-            let existingPeople = try viewContext.fetch(fetchRequest)
-            return !existingPeople.isEmpty
-        } catch {
-            NSLog("Error checking for duplicate person emails: \(error)")
-            return false
+
+extension PeopleStorage {
+    func addPersonIfNotExists(name: String, email: String) {
+        // Check if the person already exists by name or email
+        if !doesPersonExist(withEmail: email) && !doesPersonExist(withName: name) {
+            // Add new person logic here (e.g., creating and saving a new People object)
+            let newPerson = People(context: viewContext)
+            newPerson.name = name
+            newPerson.email = email
+
+            do {
+                try viewContext.save()
+                //print("New person added: \(name) with email: \(email)")
+                print("New person added with full email: \(newPerson.email ?? "No Email")")
+            } catch {
+                print("Failed to add new person: \(error)")
+            }
+        } else {
+            print("Person already exists and will not be added again.")
         }
     }
 }
+
+
 

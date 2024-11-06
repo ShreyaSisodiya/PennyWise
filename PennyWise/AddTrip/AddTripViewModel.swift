@@ -8,7 +8,9 @@
 import Foundation
 import Combine
 
+
 class AddTripViewModel : ObservableObject{
+    
     
     @Published var people : [People] = []
     private var cancellable : AnyCancellable?
@@ -22,8 +24,7 @@ class AddTripViewModel : ObservableObject{
     @Published var peopleEmails = [String]()
     @Published var newPersonName : String = ""
     @Published var newPersonEmail : String = ""
-    //@Published var personChosen : People = People()
-    @Published var personChosen: People?
+    @Published var personChosen : People = People()
     
     @Published var inlineErrorForTripName : String = ""
     @Published var inlineErrorForPeople : String = ""
@@ -34,6 +35,8 @@ class AddTripViewModel : ObservableObject{
     @Published var personIsValid : Bool = false
     
     private var cancellables = Set<AnyCancellable>()
+    
+
     
     private var isTripNameEmptyPublisher : AnyPublisher<Bool, Never>{
         $tripName
@@ -90,21 +93,39 @@ class AddTripViewModel : ObservableObject{
             .debounce(for: 0.2, scheduler: RunLoop.main)
             .removeDuplicates()
             .map { newEmail in
-                // Check if the new email already exists in the current list of peopleEmails
-                return !self.peopleEmails.contains(newEmail.lowercased())
+                NSLog("New email being checked: \(newEmail)")
+                let isUnique = !PeopleStorage.shared.doesPersonExist(withEmail: newEmail)
+                self.inlineErrorForEmail = isUnique ? "" : "A person with this email already exists across all trips."
+                return isUnique
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private var isNewPersonNameUniquePublisher: AnyPublisher<Bool, Never> {
+        $newPersonName
+            .debounce(for: 0.2, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .map { newName in
+                let isUnique = !PeopleStorage.shared.doesPersonExist(withName: newName)
+                self.inlineErrorForPeople = isUnique ? "" : "A person with this name already exists across all trips."
+                return isUnique
             }
             .eraseToAnyPublisher()
     }
 
     
     private var isNewPersonValidPublisher: AnyPublisher<Bool, Never> {
-        Publishers.CombineLatest3(isNewPersonNameEmptyPublisher, isNewPersonEmailEmptyPublisher, isNewPersonEmailUniquePublisher)
-            .map { isNameEmpty, isEmailEmpty, isEmailUnique in
-                !isNameEmpty && !isEmailEmpty && isEmailUnique
-            }
-            .eraseToAnyPublisher()
+        Publishers.CombineLatest4(
+            isNewPersonNameEmptyPublisher,
+            isNewPersonEmailEmptyPublisher,
+            isNewPersonEmailUniquePublisher,
+            isNewPersonNameUniquePublisher
+        )
+        .map { isNameEmpty, isEmailEmpty, isEmailUnique, isNameUnique in
+            !isNameEmpty && !isEmailEmpty && isEmailUnique && isNameUnique
+        }
+        .eraseToAnyPublisher()
     }
-
 
     private var isPersonValidPublisher : AnyPublisher<Bool, Never>{
         $personIsValid
@@ -133,10 +154,8 @@ class AddTripViewModel : ObservableObject{
         cancellable = peoplePublisher.sink{ people in
             self.people = people
             DispatchQueue.main.async {
-                if !self.people.isEmpty {
-                    self.personChosen = self.people.first // Safely unwrap to avoid `nil`
-                } else {
-                    self.personChosen = nil // Set to `nil` if `people` is empty
+                if !self.people.isEmpty{
+                    self.personChosen = self.people[0]
                 }
             }
         }
@@ -182,24 +201,31 @@ class AddTripViewModel : ObservableObject{
         
     }
     
-    func addPerson(){
-            peopleNames.append(personChosen!.wrappedName)
-            peopleEmails.append(personChosen!.wrappedEmail)
+    func addPerson() {
+        // Check if the chosen person's name is already in the peopleNames list
+        if !peopleNames.contains(personChosen.wrappedName) {
+            peopleNames.append(personChosen.wrappedName)
+            peopleEmails.append(personChosen.wrappedEmail)
+        } else {
+            // Optionally, show an error message or log if the name is already in the list
+            inlineErrorForPeople = "This person is already included in the trip."
+            NSLog("Person with this name is already in the list.")
+        }
     }
+
     
     func addNewPerson() {
-        // Check if the new person email already exists in the list
-        if !peopleEmails.contains(newPersonEmail.lowercased()) {
+        // Check if the new person name or email already exists in the list
+        if !peopleNames.contains(newPersonName.lowercased()) && !peopleEmails.contains(newPersonEmail.lowercased()) {
             peopleNames.append(newPersonName)
             peopleEmails.append(newPersonEmail)
             newPersonName = ""
             newPersonEmail = ""
         } else {
-            // Optionally, set an inline error or show a warning if desired
-            inlineErrorForPeople = "A person with this email already exists in the trip."
+            // Set an inline error or show a warning if a duplicate is found
+            inlineErrorForPeople = "A person with this name or email already exists in the trip."
         }
     }
-
 
     
     func deletePerson(){
@@ -209,15 +235,31 @@ class AddTripViewModel : ObservableObject{
         }
     }
     
+    func resetFields() {
+        tripName = ""
+        durationFrom = Date.now
+        durationTo = Date.now.addingTimeInterval(secondsInDay)
+        peopleNames.removeAll()
+        peopleEmails.removeAll()
+        newPersonName = ""
+        newPersonEmail = ""
+        //inlineErrorForTripName = ""
+        //inlineErrorForPeople = ""
+        //inlineErrorForEmail = ""
+    }
+    
     func addTrip() {
-        // The form is already validated by isFormValidPublisher, so this function only needs to add the trip
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         let tripDuration: String = dateFormatter.string(from: durationFrom) + to + dateFormatter.string(from: durationTo)
-        
+                
         TripsStorage.shared.add(tripName: tripName, tripDuration: tripDuration, peopleNames: peopleNames, peopleEmails: peopleEmails)
+
         
         // Optionally clear the form or perform other post-save actions if needed
         inlineErrorForTripName = ""
+        resetFields()
     }
+   
 }

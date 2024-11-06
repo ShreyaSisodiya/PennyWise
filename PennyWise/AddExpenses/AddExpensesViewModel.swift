@@ -26,6 +26,9 @@ class AddExpensesViewModel : ObservableObject{
     @Published var splitAmounts = [String]()
     @Published var expenseBill : Data? = nil
     
+    @Published var equivalentAmount: String = ""
+    private var currencyManager: CurrencyManager
+    
     private var cancellables = Set<AnyCancellable>()
     @Published var inlineErrorForExpenseName : String = ""
     @Published var inlineErrorForExpenseAmount : String = ""
@@ -66,28 +69,71 @@ class AddExpensesViewModel : ObservableObject{
             }
             .eraseToAnyPublisher()
     }
-
     
-    private var areSplitsVaildPublisher : AnyPublisher<Bool, Never>{
+//    private var areSplitsVaildPublisher: AnyPublisher<Bool, Never> {
+//        $splitAmounts
+//            .debounce(for: 0.2, scheduler: RunLoop.main)
+//            .removeDuplicates()
+//            .map { splitAmounts in
+//
+//                guard self.customSplitEnabled,
+//                      let totalExpense = Double(self.expenseCost),
+//                      !splitAmounts.contains(""),
+//                      !splitAmounts.compactMap(Double.init).isEmpty else {
+//                    return false // Invalid if custom split is enabled but has empty entries
+//                }
+//                
+//                // Check if the sum of the split amounts matches the expense cost
+//                let totalSplit = splitAmounts.compactMap(Double.init).reduce(0, +)
+//                return abs(totalSplit - totalExpense) < 0.01 // Allow for minor rounding errors
+//            }
+//            .eraseToAnyPublisher()
+//    }
+//
+//    
+//    private var isFormValidPublisher : AnyPublisher<Bool, Never>{
+//        Publishers.CombineLatest3(isExpenseNameEmptyPublisher, isExpenseAmountValidPublisher, areSplitsVaildPublisher)
+//            .map{
+//                !$0 && $1 == .valid && $2
+//            }
+//            .eraseToAnyPublisher()
+//    }
+    
+    private var areSplitsVaildPublisher: AnyPublisher<Bool, Never> {
         $splitAmounts
             .debounce(for: 0.2, scheduler: RunLoop.main)
             .removeDuplicates()
-            .map { if ($0.last == "" || self.expenseCost == "" || self.customSplitEnabled == false) {return true} else {return $0.compactMap(Double.init).reduce(0, +) == Double(self.expenseCost)!}}
+            .map { splitAmounts in
+                if !self.customSplitEnabled {
+                    // If custom split is off, consider the split as valid
+                    return true
+                }
+                // Validate only if custom split is enabled
+                guard let totalExpense = Double(self.expenseCost),
+                      !splitAmounts.contains(""),
+                      !splitAmounts.compactMap(Double.init).isEmpty else {
+                    return false // Invalid if custom split is enabled but has empty entries
+                }
+                
+                // Check if the sum of the split amounts matches the expense cost
+                let totalSplit = splitAmounts.compactMap(Double.init).reduce(0, +)
+                return abs(totalSplit - totalExpense) < 0.01 // Allow for minor rounding errors
+            }
             .eraseToAnyPublisher()
     }
-    
-    private var isFormValidPublisher : AnyPublisher<Bool, Never>{
+
+    private var isFormValidPublisher: AnyPublisher<Bool, Never> {
         Publishers.CombineLatest3(isExpenseNameEmptyPublisher, isExpenseAmountValidPublisher, areSplitsVaildPublisher)
-            .map{
-                !$0 && $1 == .valid && $2
+            .map { isNameEmpty, isAmountValid, areSplitsValid in
+                !isNameEmpty && isAmountValid == .valid && areSplitsValid
             }
             .eraseToAnyPublisher()
     }
     
     
-    
-    init(currentTrip : Trips){
+    init(currentTrip : Trips, currencyManager: CurrencyManager){
         self.currentTrip = currentTrip
+        self.currencyManager = currencyManager
         cancellable = peoplePublisher.sink{ people in
             self.people = people
             DispatchQueue.main.async {
@@ -138,7 +184,29 @@ class AddExpensesViewModel : ObservableObject{
             .receive(on: RunLoop.main)
             .assign(to: \.isValid, on: self)
             .store(in: &cancellables)
+        
+        // Add a publisher to calculate the equivalent amount whenever the expenseCost changes
+        $expenseCost
+            .debounce(for: 0.2, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .map { [weak self] cost in
+                guard let self = self, let amount = Double(cost) else { return "" }
+                return self.getEquivalentAmount(for: amount)
+            }
+            .assign(to: \.equivalentAmount, on: self)
+            .store(in: &cancellables)
     }
+    
+    func getEquivalentAmount(for amount: Double) -> String {
+        if currencyManager.selectedCurrency == "USD" {
+            let convertedAmount = currencyManager.convertUSDtoEuro(amount)
+            return currencyManager.formatAmount(convertedAmount, currency: "Euro")
+        } else {
+            let convertedAmount = currencyManager.convertEuroToUSD(amount)
+            return currencyManager.formatAmount(convertedAmount, currency: "USD")
+        }
+    }
+    
     
     func addExpense(){
         if customSplitEnabled == false{

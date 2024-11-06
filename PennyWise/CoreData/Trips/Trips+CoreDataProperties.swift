@@ -2,7 +2,7 @@
 //  Trips+CoreDataProperties.swift
 //  PennyWise
 //
-//  Created by Shreya Sisodiya on 10/30/24.
+//  Created by Shreya Sisodiya on 11/5/24.
 //
 //
 
@@ -20,19 +20,20 @@ extension Trips {
     @NSManaged public var name: String?
     @NSManaged public var hasExpenses: NSSet?
     @NSManaged public var hasPeople: NSSet?
-
-    public var wrappedName: String { name ?? "Unknown" }
-    public var wrappedDuration: String { duration ?? "Unknown" }
     
-    public var peopleArray: [People] {
+    public var wrappedName : String{ name ?? "Unknown" }
+    public var wrappedDuration : String{ duration ?? "Unknown" }
+    
+    public var peopleArray : [People]{
         let set = hasPeople as? Set<People> ?? []
-        return set.sorted {$0.wrappedName < $1.wrappedName}
+        return set.sorted{$0.wrappedName < $1.wrappedName}
     }
     
-    public var expensesArray: [Expenses] {
+    public var expensesArray : [Expenses]{
         let set = hasExpenses as? Set<Expenses> ?? []
-        return set.sorted {$0.date! > $1.date!}
+        return set.sorted{$0.date! > $1.date!}
     }
+
 }
 
 // MARK: Generated accessors for hasExpenses

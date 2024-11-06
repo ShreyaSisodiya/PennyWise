@@ -11,6 +11,7 @@ struct AddTripView: View {
     
     @StateObject private var addTripViewModel = AddTripViewModel()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @EnvironmentObject var currencyManager: CurrencyManager
     
     var body: some View {
         VStack{
@@ -26,6 +27,17 @@ struct AddTripView: View {
                 }
                 
                 
+                // Currency Picker
+                Section(header: Text("Select Currency")) {
+                    Picker("Currency", selection: $currencyManager.selectedCurrency) {
+                        Text("USD").tag("USD")
+                        Text("Euro").tag("Euro")
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                }
+
+                
+                
                 Section(header : Text(tripPeopleHeader), footer: Text(addTripViewModel.inlineErrorForPeople).foregroundColor(.red)){
                     List{
                         ForEach(addTripViewModel.peopleNames, id : \.self){name in
@@ -39,17 +51,11 @@ struct AddTripView: View {
                 
                 
                 Section(header : Text(addPersonHeader)){
-                    Picker(peopleNamePickerText, selection: Binding(
-                        get: { addTripViewModel.personChosen ?? addTripViewModel.people.first ?? People() },
-                        set: { newSelection in
-                            addTripViewModel.personChosen = newSelection
-                        }
-                    )) {
-                        ForEach(addTripViewModel.people, id: \.self) { item in
+                    Picker(peopleNamePickerText, selection: $addTripViewModel.personChosen){
+                        ForEach(addTripViewModel.people, id : \.self){ item in
                             Text(item.wrappedName)
                         }
                     }
-
                     Button(action: addTripViewModel.addPerson){
                         RoundedRectangle(cornerRadius: buttonCornerRadius)
                             .frame(height : buttonFrameHeight)
