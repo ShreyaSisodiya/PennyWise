@@ -43,10 +43,12 @@ struct SettleUpView: View {
             return AnyView(
                 ForEach(dictionary.keys.sorted(), id: \.self) { key2 in
                     if let amounts = dictionary[key2] {
-                        let amountOwed = amounts.reduce(0, +)
-                        let currencySymbol = currencyManager.selectedCurrency == "USD" ? "$" : "€"
-                        let displayText = "\(owes) \(key2) \(currencySymbol)\(String(format: doubleFormat, amountOwed))"
-                        Text(displayText)
+                        let totalOwed = amounts.reduce(0, +)
+                        let convertedAmount = currencyManager.selectedCurrency == "USD"
+                            ? totalOwed
+                            : currencyManager.convertUSDtoEuro(totalOwed)
+                        let formattedAmount = currencyManager.formatAmount(convertedAmount, currency: currencyManager.selectedCurrency)
+                        Text("\(owes) \(key2) \(formattedAmount)")
                     }
                 }
             )

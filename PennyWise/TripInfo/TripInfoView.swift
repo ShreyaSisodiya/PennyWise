@@ -35,6 +35,15 @@ struct TripInfoView: View {
                         }
                     }
                     
+                    // Currency Picker Section
+                    Section(header: Text("Edit Currency Type")) {
+                        Picker("Currency", selection: $currencyManager.selectedCurrency) {
+                            Text("USD").tag("USD")
+                            Text("Euro").tag("Euro")
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                    }
+                    
                     Section(header : Text(addPersonHeader)){
                         Picker(peopleNamePickerText, selection: $tripInfoViewModel.personChosen) {
                             ForEach(tripInfoViewModel.people.removingDuplicates(by: \.wrappedEmail), id: \.self) { item in

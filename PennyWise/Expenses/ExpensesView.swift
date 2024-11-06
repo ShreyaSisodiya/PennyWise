@@ -23,11 +23,17 @@ struct ExpensesView: View {
                             VStack(alignment: .leading, spacing: 10){
                                 Text(expense.name!)
                                 
-                                // Displaying the amount with the correct currency symbol
-                                let currencySymbol = currencyManager.selectedCurrency == "USD" ? "$" : "€"
-                                let subtitle = "\(expense.paidBy!.wrappedName) paid: \(currencySymbol)\(expense.amount!)"
                                 
-                                Text(subtitle).font(.subheadline).foregroundColor(.gray)
+                                // Convert and format amount based on selected currency
+                                if let amount = Double(expense.amount!) {
+                                    let convertedAmount = currencyManager.selectedCurrency == "USD" ? amount : currencyManager.convertUSDtoEuro(amount)
+                                    let formattedAmount = currencyManager.formatAmount(convertedAmount, currency: currencyManager.selectedCurrency)
+                                    
+                                    let subtitle = "\(expense.paidBy!.wrappedName) paid: \(formattedAmount)"
+                                    Text(subtitle).font(.subheadline).foregroundColor(.gray)
+                                    
+                                }
+                                
                             }.frame(height : 75)
                         }
                     }
