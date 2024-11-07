@@ -70,35 +70,6 @@ class AddExpensesViewModel : ObservableObject{
             .eraseToAnyPublisher()
     }
     
-//    private var areSplitsVaildPublisher: AnyPublisher<Bool, Never> {
-//        $splitAmounts
-//            .debounce(for: 0.2, scheduler: RunLoop.main)
-//            .removeDuplicates()
-//            .map { splitAmounts in
-//
-//                guard self.customSplitEnabled,
-//                      let totalExpense = Double(self.expenseCost),
-//                      !splitAmounts.contains(""),
-//                      !splitAmounts.compactMap(Double.init).isEmpty else {
-//                    return false // Invalid if custom split is enabled but has empty entries
-//                }
-//                
-//                // Check if the sum of the split amounts matches the expense cost
-//                let totalSplit = splitAmounts.compactMap(Double.init).reduce(0, +)
-//                return abs(totalSplit - totalExpense) < 0.01 // Allow for minor rounding errors
-//            }
-//            .eraseToAnyPublisher()
-//    }
-//
-//    
-//    private var isFormValidPublisher : AnyPublisher<Bool, Never>{
-//        Publishers.CombineLatest3(isExpenseNameEmptyPublisher, isExpenseAmountValidPublisher, areSplitsVaildPublisher)
-//            .map{
-//                !$0 && $1 == .valid && $2
-//            }
-//            .eraseToAnyPublisher()
-//    }
-    
     private var areSplitsVaildPublisher: AnyPublisher<Bool, Never> {
         $splitAmounts
             .debounce(for: 0.2, scheduler: RunLoop.main)

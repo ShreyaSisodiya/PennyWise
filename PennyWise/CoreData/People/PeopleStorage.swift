@@ -54,11 +54,6 @@ extension PeopleStorage: NSFetchedResultsControllerDelegate {
 }
 
 extension PeopleStorage {
-//    func doesPersonExist(withEmail email: String) -> Bool {
-//        // Directly check the stored people array for any matching email
-//        let lowercasedEmail = email.lowercased()
-//        return people.value.contains { $0.wrappedEmail.lowercased() == lowercasedEmail }
-//    }
     
     func doesPersonExist(withEmail email: String) -> Bool {
         let lowercasedEmail = email.lowercased()

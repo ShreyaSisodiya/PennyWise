@@ -33,29 +33,7 @@ class TripsStorage: NSObject, ObservableObject {
             NSLog("Error: Could not fetch objects")
         }
     }
-    
-//    func add(tripName: String, tripDuration: String, peopleNames: [String], peopleEmails: [String]) {
-//        
-//        let newTrip = Trips(context: viewContext)
-//        newTrip.name = tripName
-//        newTrip.duration = tripDuration
-//        
-//        var peopleArray = [People]()
-//        
-//        for item in 0..<peopleNames.count {
-//            if !PeopleStorage.shared.doesPersonExist(withEmail: peopleEmails[item]) {
-//                let person = People(context: viewContext)
-//                person.name = peopleNames[item]
-//                person.email = peopleEmails[item]
-//                peopleArray.append(person)
-//            } else {
-//                print("Person with email \(peopleEmails[item]) already exists and won't be added.")
-//            }
-//        }
-//        
-//        newTrip.addToHasPeople(NSSet(array: peopleArray))
-//        try? viewContext.save()
-//    }
+
     
     func add(tripName: String, tripDuration: String, peopleNames: [String], peopleEmails: [String]) {
         
@@ -87,25 +65,6 @@ class TripsStorage: NSObject, ObservableObject {
             print("Failed to save trip: \(error)")
         }
     }
-    
-
-//    func addPeopleToTrip(currentTrip: Trips, peopleNames: [String], peopleEmails: [String]) {
-//        var peopleArray = [People]()
-//        
-//        for item in 0..<peopleNames.count {
-//            if !PeopleStorage.shared.doesPersonExist(withEmail: peopleEmails[item]) {
-//                let person = People(context: viewContext)
-//                person.name = peopleNames[item]
-//                person.email = peopleEmails[item]
-//                peopleArray.append(person)
-//            } else {
-//                print("Person with email \(peopleEmails[item]) already exists and won't be added.")
-//            }
-//        }
-//        
-//        currentTrip.addToHasPeople(NSSet(array: peopleArray))
-//        try? viewContext.save()
-//    }
     
     func addPeopleToTrip(currentTrip: Trips, peopleNames: [String], peopleEmails: [String]) {
         var peopleArray = [People]()

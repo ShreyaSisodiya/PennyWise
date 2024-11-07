@@ -30,7 +30,7 @@ struct SettleUpView: View {
                     .overlay(Text(remindPeopleButtonText).foregroundColor(.white))
             }
             .padding()
-            .disabled(!MailView.canSendMail)
+            //.disabled(!MailView.canSendMail)
             .sheet(isPresented: $settleUpViewModel.showMailView) {
                 MailView(data: $settleUpViewModel.mailData) { _ in }
             }
